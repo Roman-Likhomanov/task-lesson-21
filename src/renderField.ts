@@ -1,7 +1,7 @@
 export function renderField(
   el: HTMLElement,
   field: boolean[][],
-  cb: (...args: any[]) => void
+  cb: (...args: number[]) => void
 ) {
   el.innerHTML = `<table>
         <tbody>
