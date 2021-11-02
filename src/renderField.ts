@@ -1,33 +1,35 @@
-export function renderField(el:HTMLElement, field:boolean[][], cb:Function) {
-    el.innerHTML = `<table>
+export function renderField(el: HTMLElement, field: boolean[][], cb: Function) {
+  el.innerHTML = `<table>
         <tbody>
         ${field
-            .map(
-                (row, y) =>
-                    `<tr>${row
-                        .map(
-                            (cell, x) => `<td
+          .map(
+            (row, y) =>
+              `<tr>${row
+                .map(
+                  (cell, x) => `<td
                       class="cell cell--${Boolean(cell) ? "alive" : "dead"}"
                       data-x="${x}" data-y="${y}"
                       >
                       </td>`
-                        )
-                        .join("")}</tr>`
-            )
-            .join("")}
+                )
+                .join("")}</tr>`
+          )
+          .join("")}
         </tbody>
         </table>`;
-    const table = el.querySelector("table");
-    if(!table) {return null};
-    
-    table.addEventListener("click", (ev) => {
-        const target = ev.target as HTMLTextAreaElement;
+  const table = el.querySelector("table");
+  if (!table) {
+    return null;
+  }
 
-        if (!target.matches(".cell")) {
-            return;
-        }
-        const x = Number(target.getAttribute("data-x"));
-        const y = Number(target.getAttribute("data-y"));
-        cb(x, y);
-    })
+  table.addEventListener("click", (ev) => {
+    const target = ev.target as HTMLTextAreaElement;
+
+    if (!target.matches(".cell")) {
+      return;
+    }
+    const x = Number(target.getAttribute("data-x"));
+    const y = Number(target.getAttribute("data-y"));
+    cb(x, y);
+  });
 }
