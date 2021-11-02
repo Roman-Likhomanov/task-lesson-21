@@ -1,4 +1,8 @@
-export function renderField(el: HTMLElement, field: boolean[][], cb: (...args: any[]) => void) {
+export function renderField(
+  el: HTMLElement,
+  field: boolean[][],
+  cb: (...args: any[]) => void
+) {
   el.innerHTML = `<table>
         <tbody>
         ${field
