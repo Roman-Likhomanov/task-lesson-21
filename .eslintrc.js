@@ -12,6 +12,11 @@ module.exports = {
   },
   plugins: ["jest", "@typescript-eslint"],
   rules: {
+    "no-extra-boolean-cast": "off",
+    "prefer-const": "off",
+    "no-param-reassign": "off",
+    "consistent-return": "off",
+    "no-continue": "off",
     "no-var-requires": "off",
     "no-shadow": "off",
     "import/extensions": "off",
@@ -19,8 +24,6 @@ module.exports = {
     "no-plusplus": "off",
     "default-case": "off",
     "no-useless-escape": "off",
-    "no-alert": "off",
-    "no-console": "off",
     "max-len": [
       "error",
       {

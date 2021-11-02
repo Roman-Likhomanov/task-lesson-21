@@ -1,4 +1,5 @@
 import { isCellAlive } from "./isCellAlive";
+
 export function getNumberOfNeighbour(
   field: boolean[][],
   x: number,
@@ -11,7 +12,7 @@ export function getNumberOfNeighbour(
       if (i === y && j === x) {
         continue;
       }
-      num = num + Number(isCellAlive(field, j, i));
+      num += Number(isCellAlive(field, j, i));
     }
   }
   return num;

@@ -1,4 +1,5 @@
 import { getNextCellState } from "./getNextCellState";
+
 describe("getNextCellState", () => {
   it("returns false for dead cell in dead env", () => {
     expect(getNextCellState([[false]], 0, 0)).toBe(false);

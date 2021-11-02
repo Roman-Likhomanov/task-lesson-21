@@ -1,4 +1,4 @@
-export function renderField(el: HTMLElement, field: boolean[][], cb: Function) {
+export function renderField(el: HTMLElement, field: boolean[][], cb:Function) {
   el.innerHTML = `<table>
         <tbody>
         ${field
@@ -7,7 +7,7 @@ export function renderField(el: HTMLElement, field: boolean[][], cb: Function) {
               `<tr>${row
                 .map(
                   (cell, x) => `<td
-                      class="cell cell--${Boolean(cell) ? "alive" : "dead"}"
+                      class="cell cell--${cell ? "alive" : "dead"}"
                       data-x="${x}" data-y="${y}"
                       >
                       </td>`
