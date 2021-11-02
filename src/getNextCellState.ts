@@ -7,7 +7,8 @@ export function getNextCellState(field: boolean[][], x: number, y: number) {
 
   if (isAlive && (liveNeighbour === 3 || liveNeighbour === 2)) {
     return true;
-  } if (liveNeighbour === 3) {
+  }
+  if (liveNeighbour === 3) {
     return true;
   }
   return false;
