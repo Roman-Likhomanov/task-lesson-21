@@ -16,7 +16,8 @@ const initialField = [
 ];
 
 export function gameOfLife(el: HTMLElement, step = 1000) {
-  let stepInterval: any;
+  let stepInterval: number;
+
   let field = initialField.map((el) => [...el]);
   const gameField = document.createElement("div");
 
@@ -49,7 +50,7 @@ export function gameOfLife(el: HTMLElement, step = 1000) {
       target.innerHTML = "Stop";
       field = getNextGeneration(field);
       renderField(gameField, field, handleUserClick);
-      stepInterval = setInterval(() => {
+      stepInterval = window.setInterval(() => {
         field = getNextGeneration(field);
         renderField(gameField, field, handleUserClick);
       }, step);
@@ -61,7 +62,11 @@ export function gameOfLife(el: HTMLElement, step = 1000) {
     renderField(gameField, field, handleUserClick);
   });
 
-  if (!isAnyoneAlive(field)) {
-    clearInterval(stepInterval);
+  function autoStop() {
+    if (!isAnyoneAlive(field)) {
+      clearInterval(stepInterval);
+      startButton.innerHTML = "Start";
+    }
   }
+  autoStop();
 }
