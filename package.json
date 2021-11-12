@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "lint": "prettier --check . && eslint . && stylelint \"**/*.css\" --ext .js,.ts && tsc --noEmit",
-    "lint:fix": "prettier --write . && eslint . --fix && stylelint \"**/*.css\" --fix --ext .js,.ts",
+    "lint": "prettier --check . && eslint . --ext .js,.ts && tsc --noEmit && stylelint \"**/*.css\"",
+    "lint:fix": "prettier --write . && eslint . --fix --ext .js,.ts && stylelint \"**/*.css\"",
     "prepare": "husky install",
     "build": "webpack --node-env production",
     "dev": "webpack serve"
@@ -61,5 +61,6 @@
     "*.js": "eslint --fix --ext .js,.ts",
     "*.{js,css,md,json,yml,html}": "prettier --write",
     "*.css": "stylelint --fix"
-  }
+  },
+  "dependencies": {}
 }

@@ -2,21 +2,12 @@ import { renderField } from "./renderField";
 import { getNextGeneration } from "./getNextGeneration";
 import { isAnyoneAlive } from "./isAnyoneAlive";
 
-const initialField = [
-  [false, false, false, false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false, false, false, false],
-];
+const initialField:boolean[][] = Array(10)
+  .fill(0)
+  .map((el) => Array(10).fill(false));
 
 export function gameOfLife(el: HTMLElement, step = 1000) {
-  let stepInterval: number;
+  let stepInterval: any;
 
   let field = initialField.map((el) => [...el]);
   const gameField = document.createElement("div");
@@ -40,6 +31,16 @@ export function gameOfLife(el: HTMLElement, step = 1000) {
   resetButton.innerHTML = "Reset";
   el.appendChild(resetButton);
 
+  const inputRange = document.createElement("input");
+  inputRange.setAttribute("type","range");
+  el.appendChild(inputRange);
+
+  inputRange.addEventListener("change", () => {
+    step = Number(inputRange.value) * 20;
+  });
+
+  let arr: string[] = [];
+
   startButton.addEventListener("click", (event) => {
     const target = event.target as HTMLTextAreaElement;
     const buttonText = target.innerHTML;
@@ -50,9 +51,21 @@ export function gameOfLife(el: HTMLElement, step = 1000) {
       target.innerHTML = "Stop";
       field = getNextGeneration(field);
       renderField(gameField, field, handleUserClick);
-      stepInterval = window.setInterval(() => {
+    
+      stepInterval = setInterval(() => {
+        arr.push(field.toString());
         field = getNextGeneration(field);
         renderField(gameField, field, handleUserClick);
+        if(arr[arr.length-1] === arr[arr.length-3]) {
+          startButton.innerHTML = "Start";
+          clearInterval(stepInterval);
+          arr = [];
+        }   
+     
+        if (!isAnyoneAlive(field)) {
+          startButton.innerHTML = "Start";
+          clearInterval(stepInterval);
+        }
       }, step);
     }
   });
@@ -61,12 +74,4 @@ export function gameOfLife(el: HTMLElement, step = 1000) {
     field = initialField.map((el) => [...el]);
     renderField(gameField, field, handleUserClick);
   });
-
-  function autoStop() {
-    if (!isAnyoneAlive(field)) {
-      clearInterval(stepInterval);
-      startButton.innerHTML = "Start";
-    }
-  }
-  autoStop();
 }
