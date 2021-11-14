@@ -7,9 +7,9 @@ jest.mock("./renderField", () => ({
   renderField: jest.fn(),
 }));
 
-jest.mock("./getNextGeneration", () => ({
-  getNextGeneration: jest.fn(),
-}));
+// jest.mock("./getNextGeneration", () => ({
+//   getNextGeneration: jest.fn(),
+// }));
 
 jest.mock("./isAnyoneAlive", () => ({
   isAnyoneAlive: jest.fn(),
@@ -33,7 +33,7 @@ describe("gameOfLife", () => {
   });
   afterEach(() => {
     (renderField as jest.Mock).mockReset();
-    (getNextGeneration as jest.Mock).mockReset();
+    // (getNextGeneration as jest.Mock).mockReset();
   });
   it("renders initial markup", () => {
     gameOfLife(el);
@@ -90,23 +90,23 @@ describe("gameOfLife", () => {
     let arr:string[] = [];
   
     gameOfLife(el, step);
-    expect(renderField).toHaveBeenCalledTimes(1);
-    expect(getNextGeneration).toHaveBeenCalledTimes(0);
     rendCb(1, 0);
     rendCb(1, 1);
     rendCb(1, 2);
+    (renderField as jest.Mock).mockClear();
     let control = el.querySelector(".game-control") as HTMLElement;
-
     control.click();
     expect(control.innerHTML).toBe("Stop");
-    expect(getNextGeneration).toHaveBeenCalledTimes(1);
-    expect(renderField).toHaveBeenCalledTimes(5);
-
+    // expect(getNextGeneration).toHaveBeenCalledTimes(1);
+    expect(renderField).toHaveBeenCalledTimes(1);
+    
     await sleep(step);
-    expect(rendField[1][0]).toBe(true);
-    expect(rendField[1][1]).toBe(true);
-    expect(rendField[1][2]).toBe(true);
     expect(arr).toBe(['false, false, false, false, false, false,false, false, false, false, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false, false, false']);
+    // expect(getNextGeneration).toHaveBeenCalledTimes(2);
+    expect(renderField).toHaveBeenCalledTimes(2);
+    expect(rendField[0][1]).toBe(true);
+    expect(rendField[1][1]).toBe(true);
+    expect(rendField[2][1]).toBe(true);
     expect(getNextGeneration).toHaveBeenCalledTimes(2);
     expect(renderField).toHaveBeenCalledTimes(3);
     await sleep(step);
