@@ -12,6 +12,8 @@ module.exports = {
   },
   plugins: ["jest", "@typescript-eslint"],
   rules: {
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-unused-expressions": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "no-extra-boolean-cast": "off",
     "prefer-const": "off",

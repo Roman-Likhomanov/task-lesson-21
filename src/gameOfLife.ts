@@ -2,7 +2,7 @@ import { renderField } from "./renderField";
 import { getNextGeneration } from "./getNextGeneration";
 import { isAnyoneAlive } from "./isAnyoneAlive";
 
-const initialField:boolean[][] = Array(10)
+const initialField: boolean[][] = Array(10)
   .fill(0)
   .map((el) => Array(10).fill(false));
 
@@ -32,10 +32,10 @@ export function gameOfLife(el: HTMLElement, step = 1000) {
   el.appendChild(resetButton);
 
   const inputRange = document.createElement("input");
-  inputRange.setAttribute("type","range");
+  inputRange.setAttribute("type", "range");
   el.appendChild(inputRange);
 
-  inputRange.addEventListener("change", () => {
+  inputRange.addEventListener("change", (ev) => {
     step = Number(inputRange.value) * 20;
   });
 
@@ -51,17 +51,17 @@ export function gameOfLife(el: HTMLElement, step = 1000) {
       target.innerHTML = "Stop";
       field = getNextGeneration(field);
       renderField(gameField, field, handleUserClick);
-    
+
       stepInterval = setInterval(() => {
         arr.push(field.toString());
-        field = getNextGeneration(field);
-        renderField(gameField, field, handleUserClick);
-        if(arr[arr.length-1] === arr[arr.length-3]) {
+        if (arr[arr.length - 1] === arr[arr.length - 3]) {
           startButton.innerHTML = "Start";
           clearInterval(stepInterval);
           arr = [];
-        }   
-     
+        }
+        field = getNextGeneration(field);
+        renderField(gameField, field, handleUserClick);
+
         if (!isAnyoneAlive(field)) {
           startButton.innerHTML = "Start";
           clearInterval(stepInterval);
