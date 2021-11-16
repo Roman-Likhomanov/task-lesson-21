@@ -7,7 +7,7 @@ const initialField: boolean[][] = Array(10)
   .map((el) => Array(10).fill(false));
 
 export function gameOfLife(el: HTMLElement, step = 1000) {
-  let stepInterval: any;
+  let stepInterval: number;
 
   let field = initialField.map((el) => [...el]);
   const gameField = document.createElement("div");
@@ -42,7 +42,7 @@ export function gameOfLife(el: HTMLElement, step = 1000) {
   let arr: string[] = [];
 
   startButton.addEventListener("click", (event) => {
-    const target = event.target as HTMLTextAreaElement;
+    const target = event.target as HTMLElement;
     const buttonText = target.innerHTML;
     if (buttonText === "Stop") {
       target.innerHTML = "Start";
@@ -52,7 +52,7 @@ export function gameOfLife(el: HTMLElement, step = 1000) {
       field = getNextGeneration(field);
       renderField(gameField, field, handleUserClick);
 
-      stepInterval = setTimeout(function interval() {
+      stepInterval = window.setTimeout(function interval() {
         arr.push(field.toString());
         if (arr[arr.length - 1] === arr[arr.length - 3]) {
           startButton.innerHTML = "Start";
@@ -66,7 +66,7 @@ export function gameOfLife(el: HTMLElement, step = 1000) {
           startButton.innerHTML = "Start";
           return;
         }
-        setTimeout(interval, step);
+        window.setTimeout(interval, step);
       }, step);
     }
   });

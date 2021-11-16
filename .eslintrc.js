@@ -12,6 +12,7 @@ module.exports = {
   },
   plugins: ["jest", "@typescript-eslint"],
   rules: {
+    "no-dupe-keys": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "no-unused-expressions": "off",
     "@typescript-eslint/no-unused-vars": "off",

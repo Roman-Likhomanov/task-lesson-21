@@ -23,7 +23,7 @@ export function renderField(
         </table>`;
   const table = el.querySelector("table");
   if (!table) {
-    return null;
+    return;
   }
 
   table.addEventListener("click", (ev) => {
