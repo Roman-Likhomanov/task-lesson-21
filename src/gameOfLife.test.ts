@@ -97,10 +97,8 @@ describe("gameOfLife", () => {
     expect(renderField).toHaveBeenCalledTimes(2);
     await sleep(step);
     expect(renderField).toHaveBeenCalledTimes(3);
-    await sleep(step);
-    expect(renderField).toHaveBeenCalledTimes(4);
     await sleep(step * 10);
-    expect(renderField).toHaveBeenCalledTimes(4);
+    expect(renderField).toHaveBeenCalledTimes(3);
   });
 
   it("auto stop isAnyone", async () => {

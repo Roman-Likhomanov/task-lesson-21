@@ -46,26 +46,27 @@ export function gameOfLife(el: HTMLElement, step = 1000) {
     const buttonText = target.innerHTML;
     if (buttonText === "Stop") {
       target.innerHTML = "Start";
-      clearInterval(stepInterval);
+      clearTimeout(stepInterval);
     } else {
       target.innerHTML = "Stop";
       field = getNextGeneration(field);
       renderField(gameField, field, handleUserClick);
 
-      stepInterval = setInterval(() => {
+      stepInterval = setTimeout(function interval() {
         arr.push(field.toString());
         if (arr[arr.length - 1] === arr[arr.length - 3]) {
           startButton.innerHTML = "Start";
-          clearInterval(stepInterval);
           arr = [];
+          return;
         }
         field = getNextGeneration(field);
         renderField(gameField, field, handleUserClick);
 
         if (!isAnyoneAlive(field)) {
           startButton.innerHTML = "Start";
-          clearInterval(stepInterval);
+          return;
         }
+        setTimeout(interval, step);
       }, step);
     }
   });
